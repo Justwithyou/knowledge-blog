@@ -36,7 +36,7 @@ export function setBackgroundMode(mode: string): void {
 	localStorage.setItem("backgroundMode", mode);
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) return;
-	
+
 	if (mode === "starry") {
 		r.classList.add("starry-dark");
 	} else {
@@ -47,7 +47,7 @@ export function setBackgroundMode(mode: string): void {
 export function applyBackgroundMode(mode: string): void {
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) return;
-	
+
 	if (mode === "starry") {
 		r.classList.add("starry-dark");
 	} else {
@@ -55,14 +55,20 @@ export function applyBackgroundMode(mode: string): void {
 	}
 }
 
-// Font family: 'sans', 'serif', 'mono', 'poppins', 'source-han'
-export const FONT_OPTIONS = ["sans", "serif", "mono", "poppins", "source-han"];
+// Font family options
+export const FONT_OPTIONS = [
+	"system",
+	"lishu",
+	"kaikai",
+	"source-code",
+	"merriweather",
+];
 export const FONT_NAMES: Record<string, string> = {
-	sans: "现代简约",
-	serif: "经典衬线",
-	mono: "等宽代码",
-	poppins: "时尚个性",
-	"source-han": "思源黑体",
+	system: "系统默认",
+	lishu: "隶书",
+	kaikai: "楷楷",
+	"source-code": "源码",
+	merriweather: "梅里",
 };
 
 export function getFontFamily(): string {
@@ -73,9 +79,11 @@ export function setFontFamily(font: string): void {
 	localStorage.setItem("fontFamily", font);
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) return;
-	
+
 	// Remove all font classes
-	FONT_OPTIONS.forEach(f => r.classList.remove(`font-${f}`));
+	for (const f of FONT_OPTIONS) {
+		r.classList.remove(`font-${f}`);
+	}
 	// Add the new font class
 	r.classList.add(`font-${font}`);
 }
