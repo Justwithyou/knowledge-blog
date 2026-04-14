@@ -25,6 +25,8 @@ export const vi: Translation = {
 	[Key.postsCount]: "bài viết",
 
 	[Key.themeColor]: "Màu giao diện",
+	[Key.backgroundColor]: "Màu nền",
+	[Key.fontFamily]: "Phông chữ",
 
 	[Key.lightMode]: "Sáng",
 	[Key.darkMode]: "Tối",
