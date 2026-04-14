@@ -43,7 +43,7 @@ function getFontFamilyForPreview(fontId: string): string {
     <button
         aria-label="Font Settings"
         role="menuitem"
-        class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90"
+        class="relative btn-regular scale-animation rounded-lg h-11 w-11 active:scale-90"
         id="font-switch"
         onclick={showPanel}
     >
