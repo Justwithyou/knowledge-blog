@@ -143,6 +143,11 @@ define({
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace
   --font-poppins: 'Poppins', 'Noto Sans SC', sans-serif
   --font-source-han: 'Source Han Sans', 'Noto Sans SC', sans-serif
+  /* New font options */
+  --font-lishu: 'LiSu', 'STLiti', 'FangSong', serif
+  --font-kaikai: 'KaiTi', 'STKaiti', '楷体', serif
+  --font-source-code: 'Source Code Pro', 'JetBrains Mono', monospace
+  --font-merriweather: 'Merriweather', 'Noto Serif SC', Georgia, serif
 
 :root.font-sans
   --font-body: var(--font-sans)
@@ -154,6 +159,17 @@ define({
   --font-body: var(--font-poppins)
 :root.font-source-han
   --font-body: var(--font-source-han)
+/* New font classes */
+:root.font-system
+  --font-body: var(--font-sans)
+:root.font-lishu
+  --font-body: var(--font-lishu)
+:root.font-kaikai
+  --font-body: var(--font-kaikai)
+:root.font-source-code
+  --font-body: var(--font-source-code)
+:root.font-merriweather
+  --font-body: var(--font-merriweather)
 
 body
   font-family: var(--font-body, var(--font-sans))
