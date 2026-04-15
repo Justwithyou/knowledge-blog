@@ -15,6 +15,7 @@ import "@fontsource/noto-serif-sc/400.css";
 import "@fontsource/noto-serif-sc/700.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
+import "../styles/variables.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -152,8 +153,8 @@ const bannerOffset =
 			}
 
 			// Load font family and apply font class
-			const fontFamily = localStorage.getItem('fontFamily') || 'sans';
-			const fontOptions = ['sans', 'serif', 'mono', 'poppins', 'source-han'];
+			const fontFamily = localStorage.getItem('fontFamily') || 'system';
+			const fontOptions = ['system', 'sans', 'serif', 'mono', 'poppins', 'source-han', 'lishu', 'kaikai', 'source-code', 'merriweather'];
 			fontOptions.forEach(f => document.documentElement.classList.remove('font-' + f));
 			document.documentElement.classList.add('font-' + fontFamily);
 
