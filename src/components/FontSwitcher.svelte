@@ -43,11 +43,11 @@ function getFontFamilyForPreview(fontId: string): string {
     <button
         aria-label="Font Settings"
         role="menuitem"
-        class="relative btn-regular scale-animation rounded-lg h-11 w-11 active:scale-90 text-[var(--btn-content)] dark:text-white/90"
+        class="relative btn-regular scale-animation rounded-lg h-11 w-11 active:scale-90"
         id="font-switch"
         onclick={showPanel}
     >
-        <Icon icon="material-symbols:text-fields-outline-rounded" class="text-[1.25rem]"></Icon>
+        <Icon icon="material-symbols:text-fields-outline-rounded" class="text-[1.25rem] text-white dark:text-white/90"></Icon>
     </button>
 
     <div id="font-panel" class="hidden lg:block absolute transition float-panel-closed top-11 -right-2 pt-5" >
