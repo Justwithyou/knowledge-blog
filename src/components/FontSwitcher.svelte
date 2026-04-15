@@ -47,7 +47,7 @@ function getFontFamilyForPreview(fontId: string): string {
         id="font-switch"
         onclick={showPanel}
     >
-        <Icon icon="material-symbols:text-fields-outline-rounded" class="text-[1.25rem] text-white dark:text-white/90"></Icon>
+        <Icon icon="material-symbols:text-fields-outline-rounded" class="text-[1.25rem] text-[var(--btn-content)] dark:text-white/90"></Icon>
     </button>
 
     <div id="font-panel" class="hidden lg:block absolute transition float-panel-closed top-11 -right-2 pt-5" >
