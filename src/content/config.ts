@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { collections as aiNewsCollections } from "./ai-news/config";
 
 const postsCollection = defineCollection({
 	schema: z.object({
@@ -25,4 +26,5 @@ const specCollection = defineCollection({
 export const collections = {
 	posts: postsCollection,
 	spec: specCollection,
+	...aiNewsCollections,
 };
