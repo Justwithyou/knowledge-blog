@@ -1,8 +1,10 @@
 @tailwind components;
 
 @layer components {
+    /* card-base */
     .card-base {
-        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
+        @apply rounded-lg overflow-hidden bg-[var(--card-bg)] transition;
+        border: 1px solid var(--border-color);
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
@@ -16,12 +18,23 @@
     }
     .link {
         @apply transition rounded-md p-1 -m-1 expand-animation;
+        color: var(--link-underline);
+    }
+    .link:hover {
+        color: var(--link-hover);
+        text-shadow: 0 0 8px var(--link-hover);
     }
     .link-lg {
         @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
+        color: var(--link-underline);
+    }
+    .link-lg:hover {
+        color: var(--link-hover);
+        text-shadow: 0 0 8px var(--link-hover);
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none;
+        border: 1px solid var(--border-color);
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -32,7 +45,8 @@
 
     .btn-card {
         @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
-        active:bg-[var(--btn-card-bg-active)]
+        active:bg-[var(--btn-card-bg-active)];
+        border: 1px solid var(--border-color);
     }
     .btn-card.disabled {
         @apply pointer-events-none text-black/10 dark:text-white/10
@@ -52,7 +66,8 @@
     }
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
-        text-[var(--btn-content)] dark:text-white/75
+        text-[var(--btn-content)] dark:text-white/75;
+        border: 1px solid var(--border-color);
     }
 
     .link-underline {
@@ -77,25 +92,32 @@
         display: none;
     }
 
+    /* Text color utilities using CSS variables */
     .text-90 {
-        @apply text-black/90 dark:text-white/90
+        color: var(--text-color) !important;
+        opacity: 0.9;
     }
     .text-75 {
-        @apply text-black/75 dark:text-white/75
+        color: var(--text-color) !important;
+        opacity: 0.75;
     }
     .text-50 {
-        @apply text-black/50 dark:text-white/50
+        color: var(--text-muted) !important;
+        opacity: 1;
     }
     .text-30 {
-        @apply text-black/30 dark:text-white/30
+        color: var(--text-muted) !important;
+        opacity: 0.6;
     }
     .text-25 {
-        @apply text-black/25 dark:text-white/25
+        color: var(--text-muted) !important;
+        opacity: 0.5;
     }
 
     .meta-icon {
         @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
-        text-[var(--btn-content)] mr-2
+        text-[var(--btn-content)] mr-2;
+        border: 1px solid var(--border-color);
     }
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
@@ -117,7 +139,71 @@
 }
 
 ::selection {
-    background-color: var(--selection-bg)
+    background-color: var(--selection-bg);
+    color: var(--text-color);
+}
+
+/* Cyberpunk Scanline Effect - Dark Mode Only */
+:root.dark body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(86, 156, 214, 0.01) 2px,
+        rgba(86, 156, 214, 0.01) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+    animation: scanlines 10s linear infinite;
+}
+
+@keyframes scanlines {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 100px;
+    }
+}
+
+/* Neon glow pulse for accents */
+@keyframes neon-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Cursor glow effect */
+:root.dark a, :root.dark button {
+    cursor: pointer;
+}
+
+/* Scrollbar styling - IDEA style */
+:root.dark ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+:root.dark ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+:root.dark ::-webkit-scrollbar-thumb {
+    background: #5a5a5a;
+    border-radius: 3px;
+}
+
+:root.dark ::-webkit-scrollbar-thumb:hover {
+    background: #707070;
 }
 
 .dash-line {
@@ -149,4 +235,14 @@
         color: var(--codeblock-bg);
     }
   }
+}
+
+/* Code block styling - IDEA style */
+:root.dark pre, :root.dark code {
+    border: 1px solid #3c3c3c;
+    border-radius: 3px;
+}
+
+:root.dark pre:hover, :root.dark code:hover {
+    border-color: #569cd6;
 }

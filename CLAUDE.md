@@ -17,6 +17,7 @@ pnpm type-check   # TypeScript type checking (tsc --noEmit)
 pnpm lint         # Biome linter
 pnpm format       # Biome formatter
 pnpm new-post <filename>  # Scaffold a new blog post in src/content/posts/
+部署更新          # Build and sync ./dist to /var/www/knowledge-blog (sudo rsync -av --delete ./dist/ /var/www/knowledge-blog/)
 ```
 
 ## Architecture

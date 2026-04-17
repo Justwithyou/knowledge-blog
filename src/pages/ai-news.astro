@@ -18,9 +18,9 @@ newsList.sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
                 class="block p-4 rounded-lg border border-[var(--border-color)] hover:border-[var(--primary)] transition-colors"
             >
                 <div class="text-sm text-[var(--text-muted)] mb-1">
-                    {item.data.source} · {item.data.published.toLocaleDateString("zh_CN")}
+                    {item.data.source} · {item.data.published.toLocaleDateString("zh-CN")}
                 </div>
-                <h3 class="text-lg font-semibold mb-1">{item.data.title}</h3>
+                <h3 class="text-lg font-semibold mb-1 text-[var(--text-color)]">{item.data.title}</h3>
                 {item.data.description && (
                     <p class="text-sm text-[var(--text-muted)]">{item.data.description}</p>
                 )}

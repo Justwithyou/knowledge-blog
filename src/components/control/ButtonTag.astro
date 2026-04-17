@@ -1,15 +1,55 @@
 ---
 interface Props {
-	size?: string;
-	dot?: boolean;
-	href?: string;
-	label?: string;
+    href?: string;
+    label?: string;
+    hue?: number;
 }
-const { dot, href, label }: Props = Astro.props;
+const { href, label, hue = 200 } = Astro.props;
 ---
-<a href={href} aria-label={label} class="h-8 text-sm px-3 rounded-lg transition flex items-center justify-center
-    bg-[var(--btn-tag-bg)] hover:bg-[var(--btn-tag-bg-hover)] active:bg-[var(--btn-tag-bg-active)]
-    text-[var(--btn-content)] dark:text-white/90">
-    {dot && <div class="h-1 w-1 bg-[var(--btn-content)] dark:bg-[var(--card-bg)] transition rounded-md mr-2"></div>}
+<a href={href} aria-label={label} class="btn-tag" style={`--tag-hue: ${hue}`}>
     <slot></slot>
 </a>
+
+<style>
+    .btn-tag {
+        display: inline-block;
+        font-size: var(--text-xs);
+        font-family: var(--font-mono);
+        text-decoration: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+        letter-spacing: 0.02em;
+        font-weight: 500;
+    }
+
+    /* Dark theme: light text on dark background */
+    :root.dark .btn-tag {
+        background: oklch(0.20 0.15 var(--tag-hue));
+        color: oklch(0.75 0.15 var(--tag-hue));
+        border: 1px solid oklch(0.30 0.12 var(--tag-hue));
+    }
+
+    :root.dark .btn-tag:hover {
+        background: oklch(0.28 0.18 var(--tag-hue));
+        color: oklch(0.85 0.18 var(--tag-hue));
+        border-color: oklch(0.40 0.15 var(--tag-hue));
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px oklch(0.20 0.15 var(--tag-hue) / 0.4);
+    }
+
+    /* Light theme: dark text on light tinted background */
+    :root:not(.dark) .btn-tag {
+        background: oklch(0.92 0.08 var(--tag-hue));
+        color: oklch(0.35 0.12 var(--tag-hue));
+        border: 1px solid oklch(0.82 0.06 var(--tag-hue));
+    }
+
+    :root:not(.dark) .btn-tag:hover {
+        background: oklch(0.88 0.12 var(--tag-hue));
+        color: oklch(0.28 0.15 var(--tag-hue));
+        border-color: oklch(0.70 0.10 var(--tag-hue));
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px oklch(0.70 0.08 var(--tag-hue) / 0.3);
+    }
+</style>

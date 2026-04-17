@@ -19,5 +19,67 @@ const len = page.data.length;
 
 <MainGridLayout>
     <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+    {len > 0 && <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>}
+    {len === 0 && (
+        <div class="empty-state-container">
+            <span
+                class="empty-state-text"
+                data-tip="牛马正在埋头苦学"
+            >
+                在学了~在学了
+            </span>
+        </div>
+    )}
 </MainGridLayout>
+
+<style>
+    .empty-state-container {
+        position: relative;
+        width: 100%;
+        min-height: calc(100vh - 10rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .empty-state-text {
+        font-family: 'Ma Shan Zheng', cursive;
+        font-size: 1.75rem;
+        color: var(--text-muted);
+        cursor: default;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .empty-state-text:hover {
+        color: var(--primary);
+        transform: scale(1.1);
+    }
+
+    .empty-state-text[data-tip]::after {
+        content: attr(data-tip);
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        background: var(--card-bg);
+        border-radius: 0.5rem;
+        font-family: 'Ma Shan Zheng', cursive;
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .empty-state-text:hover[data-tip]::after {
+        opacity: 1;
+    }
+
+    :global(.dark) .empty-state-text[data-tip]::after {
+        background: var(--card-bg);
+    }
+</style>

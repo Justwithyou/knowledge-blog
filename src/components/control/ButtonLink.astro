@@ -1,43 +1,112 @@
 ---
 interface Props {
-	badge?: string;
-	url?: string;
-	label?: string;
+    size?: string;
+    dot?: boolean;
+    href?: string;
+    label?: string;
+    hue?: number;
 }
-const { badge, url, label } = Astro.props;
+const { dot, href, label, hue = 200 }: Props = Astro.props;
 ---
-<a href={url} aria-label={label}>
-    <button
-        class:list={`
-            w-full
-            h-10
-            rounded-lg
-            bg-none
-            hover:bg-[var(--btn-category-bg-hover)]
-            active:bg-[var(--btn-category-bg-active)]
-            transition-all
-            pl-2
-            hover:pl-3
-
-            text-neutral-700
-            hover:text-[var(--primary)]
-            dark:text-neutral-300
-            dark:hover:text-[var(--primary)]
-        `
-        }
-    >
-        <div class="flex items-center justify-between relative mr-2">
-            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  ">
-                <slot></slot>
-            </div>
-            { badge !== undefined && badge !== null && badge !== '' &&
-                <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
-                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
-                    bg-[var(--btn-category-bg)] dark:bg-[var(--btn-category-bg)]
-                    flex items-center justify-center">
-                    { badge }
-                </div>
-            }
-        </div>
-    </button>
+<a href={href} aria-label={label} class="btn-category" style={`--cat-hue: ${hue}`}>
+    {dot && <span class="btn-category-dot"></span>}
+    <slot></slot>
+    {Astro.props.badge && <span class="btn-category-badge">{Astro.props.badge}</span>}
 </a>
+
+<style>
+    .btn-category {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        font-size: var(--text-sm);
+        border-radius: 0.375rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    /* Dark theme: light text on dark background */
+    :root.dark .btn-category {
+        background: oklch(0.22 0.15 var(--cat-hue));
+        color: oklch(0.78 0.15 var(--cat-hue));
+        border: 1px solid oklch(0.32 0.12 var(--cat-hue));
+    }
+
+    :root.dark .btn-category:hover {
+        background: oklch(0.30 0.18 var(--cat-hue));
+        color: oklch(0.88 0.18 var(--cat-hue));
+        border-color: oklch(0.42 0.15 var(--cat-hue));
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px oklch(0.22 0.15 var(--cat-hue) / 0.4);
+    }
+
+    /* Light theme: dark text on light tinted background */
+    :root:not(.dark) .btn-category {
+        background: oklch(0.93 0.08 var(--cat-hue));
+        color: oklch(0.38 0.12 var(--cat-hue));
+        border: 1px solid oklch(0.80 0.06 var(--cat-hue));
+    }
+
+    :root:not(.dark) .btn-category:hover {
+        background: oklch(0.86 0.12 var(--cat-hue));
+        color: oklch(0.30 0.15 var(--cat-hue));
+        border-color: oklch(0.68 0.10 var(--cat-hue));
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px oklch(0.68 0.08 var(--cat-hue) / 0.3);
+    }
+
+    .btn-category-dot {
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    :root.dark .btn-category-dot {
+        background: oklch(0.70 0.15 var(--cat-hue));
+    }
+
+    :root:not(.dark) .btn-category-dot {
+        background: oklch(0.50 0.12 var(--cat-hue));
+    }
+
+    :root.dark .btn-category:hover .btn-category-dot {
+        background: oklch(0.85 0.18 var(--cat-hue));
+        box-shadow: 0 0 6px oklch(0.70 0.15 var(--cat-hue));
+    }
+
+    :root:not(.dark) .btn-category:hover .btn-category-dot {
+        background: oklch(0.40 0.15 var(--cat-hue));
+        box-shadow: 0 0 6px oklch(0.50 0.12 var(--cat-hue) / 0.5);
+    }
+
+    .btn-category-badge {
+        font-size: var(--text-xs);
+        font-weight: 600;
+        padding: 0.125rem 0.5rem;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+    }
+
+    :root.dark .btn-category-badge {
+        background: oklch(0.30 0.12 var(--cat-hue));
+        color: oklch(0.80 0.15 var(--cat-hue));
+    }
+
+    :root:not(.dark) .btn-category-badge {
+        background: oklch(0.85 0.08 var(--cat-hue));
+        color: oklch(0.35 0.10 var(--cat-hue));
+    }
+
+    :root.dark .btn-category:hover .btn-category-badge {
+        background: oklch(0.38 0.14 var(--cat-hue));
+        color: oklch(0.90 0.16 var(--cat-hue));
+    }
+
+    :root:not(.dark) .btn-category:hover .btn-category-badge {
+        background: oklch(0.78 0.10 var(--cat-hue));
+        color: oklch(0.28 0.12 var(--cat-hue));
+    }
+</style>

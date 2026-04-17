@@ -85,67 +85,151 @@ onMount(async () => {
 });
 </script>
 
-<div class="card-base px-8 py-6">
-    {#each groups as group}
-        <div>
-            <div class="flex flex-row w-full items-center h-[3.75rem]">
-                <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
-                    {group.year}
-                </div>
-                <div class="w-[15%] md:w-[10%]">
-                    <div
-                            class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto
-                  -outline-offset-[2px] z-50 outline-3"
-                    ></div>
-                </div>
-                <div class="w-[70%] md:w-[80%] transition text-left text-50">
-                    {group.posts.length} {i18n(group.posts.length === 1 ? I18nKey.postCount : I18nKey.postsCount)}
-                </div>
-            </div>
+<div class="archive-container">
+	{#each groups as group}
+		<div class="archive-year-group">
+			<!-- Year Header -->
+			<div class="archive-year-header">
+				<span class="archive-year">{group.year}</span>
+				<span class="archive-count">{group.posts.length} {i18n(group.posts.length === 1 ? I18nKey.postCount : I18nKey.postsCount)}</span>
+			</div>
 
-            {#each group.posts as post}
-                <a
-                        href={getPostUrlBySlug(post.slug)}
-                        aria-label={post.data.title}
-                        class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
-                >
-                    <div class="flex flex-row justify-start items-center h-full">
-                        <!-- date -->
-                        <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
-                            {formatDate(post.data.published)}
-                        </div>
-
-                        <!-- dot and line -->
-                        <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
-                            <div
-                                    class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                       bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                       outline outline-4 z-50
-                       outline-[var(--card-bg)]
-                       group-hover:outline-[var(--btn-plain-bg-hover)]
-                       group-active:outline-[var(--btn-plain-bg-active)]"
-                            ></div>
-                        </div>
-
-                        <!-- post title -->
-                        <div
-                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                     group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
-                        >
-                            {post.data.title}
-                        </div>
-
-                        <!-- tag list -->
-                        <div
-                                class="hidden md:block md:w-[15%] text-left text-sm transition
-                     whitespace-nowrap overflow-ellipsis overflow-hidden text-30"
-                        >
-                            {formatTag(post.data.tags)}
-                        </div>
-                    </div>
-                </a>
-            {/each}
-        </div>
-    {/each}
+			<!-- Timeline -->
+			<div class="archive-timeline">
+				{#each group.posts as post}
+					<a
+						href={getPostUrlBySlug(post.slug)}
+						aria-label={post.data.title}
+						class="archive-item"
+					>
+						<div class="archive-dot"></div>
+						<div class="archive-content">
+							<div class="archive-date">{formatDate(post.data.published)}</div>
+							<div class="archive-title">{post.data.title}</div>
+							{#if post.data.tags.length > 0}
+								<div class="archive-tags">{formatTag(post.data.tags)}</div>
+							{/if}
+						</div>
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/each}
 </div>
+
+<style>
+	.archive-container {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.archive-year-group {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.archive-year-header {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.archive-year {
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: var(--text-color);
+		font-family: var(--font-mono);
+	}
+
+	.archive-count {
+		font-size: 0.875rem;
+		color: var(--text-muted);
+	}
+
+	.archive-timeline {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-left: 0.5rem;
+	}
+
+	.archive-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		color: inherit;
+		transition: all 0.2s ease;
+		position: relative;
+	}
+
+	.archive-item:hover {
+		background: var(--btn-regular-bg);
+	}
+
+	.archive-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--primary);
+		margin-top: 0.5rem;
+		flex-shrink: 0;
+		transition: all 0.2s ease;
+	}
+
+	.archive-item:hover .archive-dot {
+		transform: scale(1.5);
+		box-shadow: 0 0 10px var(--primary);
+	}
+
+	.archive-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.archive-date {
+		font-size: 0.8rem;
+		font-family: var(--font-mono);
+		color: var(--text-muted);
+	}
+
+	.archive-title {
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--text-color);
+		transition: color 0.2s ease;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.archive-item:hover .archive-title {
+		color: var(--primary);
+	}
+
+	.archive-tags {
+		font-size: 0.75rem;
+		font-family: var(--font-mono);
+		color: var(--text-muted);
+		opacity: 0.7;
+	}
+
+	@media (max-width: 640px) {
+		.archive-year {
+			font-size: 1.5rem;
+		}
+
+		.archive-tags {
+			display: none;
+		}
+	}
+</style>

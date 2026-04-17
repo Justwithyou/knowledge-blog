@@ -7,14 +7,14 @@ import WidgetLayout from "./WidgetLayout.astro";
 
 const categories = await getCategoryList();
 
-const COLLAPSED_HEIGHT = "7.5rem";
+const COLLAPSED_HEIGHT = "5rem";
 const COLLAPSE_THRESHOLD = 5;
 
 const isCollapsed = categories.length >= COLLAPSE_THRESHOLD;
 
 interface Props {
-	class?: string;
-	style?: string;
+    class?: string;
+    style?: string;
 }
 const className = Astro.props.class;
 const style = Astro.props.style;
@@ -23,13 +23,27 @@ const style = Astro.props.style;
 <WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
                 class={className} style={style}
 >
-    {categories.map((c) =>
-        <ButtonLink
-            url={c.url}
-            badge={String(c.count)}
-            label={`View all posts in the ${c.name.trim()} category`}
-        >
-            {c.name.trim()}
-        </ButtonLink>
-    )}
+    <div class="categories-grid">
+        {categories.map((c) => {
+            const hue = (c.name.charCodeAt(0) * 37 + c.name.charCodeAt(c.name.length - 1) * 13) % 360;
+            return (
+                <ButtonLink
+                    url={c.url}
+                    badge={String(c.count)}
+                    label={`View all posts in the ${c.name.trim()} category`}
+                    hue={hue}
+                >
+                    {c.name.trim()}
+                </ButtonLink>
+            );
+        })}
+    </div>
 </WidgetLayout>
+
+<style>
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+</style>

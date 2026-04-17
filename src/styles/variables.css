@@ -2,166 +2,225 @@
 :root {
   --radius-large: 1rem;
   --content-delay: 150ms;
-}
-/* Starry dark background - warm amber accent, NO hue dependency */
-:root.starry-dark {
-  --page-bg: oklch(0.1 0.005 60);
-  --card-bg: oklch(0.14 0.008 60);
-  --btn-regular-bg: oklch(0.22 0.015 40);
-  --btn-regular-bg-hover: oklch(0.28 0.02 40);
-  --btn-regular-bg-active: oklch(0.32 0.025 40);
-  --btn-plain-bg-hover: oklch(0.2 0.012 40);
-  --btn-plain-bg-active: oklch(0.24 0.018 40);
-  --float-panel-bg: oklch(0.16 0.01 60);
-  --text-color: oklch(0.92 0.005 60);
-  --text-muted: oklch(0.6 0.015 60);
-  --border-color: oklch(0.22 0.012 60);
-  --codeblock-bg: oklch(0.12 0.008 60);
-  --line-color: oklch(0.18 0.01 60);
-/* Fixed primary color - warm amber/orange, NO var(--hue) */
-  --primary: oklch(0.7 0.16 50);
-  --btn-content: oklch(0.95 0.02 60);
-/* Other fixed colors */
-  --link-underline: oklch(0.7 0.14 50);
-  --link-hover: oklch(0.75 0.12 50);
-  --link-active: oklch(0.65 0.16 50);
-  --selection-bg: oklch(0.7 0.14 50);
-  --codeblock-selection: oklch(0.65 0.14 50);
-  --deep-text: oklch(0.6 0.02 60);
-  --title-active: oklch(0.7 0.16 50);
-  --toc-item-active: oklch(0.7 0.14 50);
-}
-:root.starry-dark pre {
-  background: oklch(0.12 0.008 60) !important;
-}
-:root.starry-dark code {
-  background: oklch(0.18 0.015 40) !important;
-}
-/* Text color adjustments for starry-dark mode - warm neutrals */
-:root.starry-dark .text-90 {
-  color: oklch(0.9 0.005 60) !important;
-}
-:root.starry-dark .text-75 {
-  color: oklch(0.75 0.008 60) !important;
-}
-:root.starry-dark .text-50 {
-  color: oklch(0.55 0.01 60) !important;
-}
-:root.starry-dark .text-30 {
-  color: oklch(0.4 0.012 60) !important;
-}
-:root.starry-dark .text-25 {
-  color: oklch(0.35 0.015 60) !important;
-}
-/* An util to define variables that vary with light and dark mode */
-:root {
-  --primary: oklch(0.7 0.14 var(--hue));
-  --page-bg: oklch(0.95 0.01 var(--hue));
-  --page-bg-pure: oklch(0.98 0.005 var(--hue));
-  --card-bg: white;
-  --btn-content: oklch(0.55 0.12 var(--hue));
-  --btn-regular-bg: oklch(0.95 0.025 var(--hue));
-  --btn-regular-bg-hover: oklch(0.9 0.05 var(--hue));
-  --btn-regular-bg-active: oklch(0.85 0.08 var(--hue));
-  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue));
-  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue));
-  --btn-card-bg-hover: oklch(0.98 0.005 var(--hue));
-  --btn-card-bg-active: oklch(0.9 0.03 var(--hue));
+
+  /* Deep Black Accent */
+  --primary: #1a1a1a;
+  --primary-hover: #404040;
+  --primary-active: #000000;
+
+  /* Text Colors - Light Mode */
+  --text-color: #1a1a1a;
+  --text-muted: #666666;
+
+  /* Color Scheme - Minimalist Developer Style */
+  --page-bg: #fafafa;
+  --page-bg-pure: #ffffff;
+  --card-bg: #ffffff;
+
+  --btn-content: #1a1a1a;
+
+  --btn-regular-bg: #f5f5f5;
+  --btn-regular-bg-hover: #e5e5e5;
+  --btn-regular-bg-active: #d4d4d4;
+
+  --btn-plain-bg-hover: #f5f5f5;
+  --btn-plain-bg-active: #e5e5e5;
+
+  --btn-card-bg-hover: #fafafa;
+  --btn-card-bg-active: #f5f5f5;
+
   --enter-btn-bg: var(--btn-regular-bg);
   --enter-btn-bg-hover: var(--btn-regular-bg-hover);
   --enter-btn-bg-active: var(--btn-regular-bg-active);
-  --deep-text: oklch(0.25 0.02 var(--hue));
-  --title-active: oklch(0.6 0.1 var(--hue));
+
+  /* Navigation bar buttons */
+  --btn-nav-bg: #f5f5f5;
+  --btn-nav-bg-hover: #e5e5e5;
+  --btn-nav-bg-active: #d4d4d4;
+
+  /* Category buttons */
+  --btn-category-bg: #f5f5f5;
+  --btn-category-bg-hover: #e5e5e5;
+  --btn-category-bg-active: #d4d4d4;
+
+  /* Tag buttons */
+  --btn-tag-bg: #f5f5f5;
+  --btn-tag-bg-hover: #e5e5e5;
+  --btn-tag-bg-active: #d4d4d4;
+
+  --deep-text: #404040;
+
+  --title-active: #1a1a1a;
+
   --line-divider: rgba(0,0,0,0.08);
+
   --line-color: rgba(0,0,0,0.1);
   --meta-divider: rgba(0,0,0,0.2);
-  --inline-code-bg: var(--btn-regular-bg);
-  --inline-code-color: var(--btn-content);
-  --selection-bg: oklch(0.9 0.05 var(--hue));
-  --codeblock-selection: oklch(0.4 0.08 var(--hue));
-  --codeblock-bg: oklch(0.17 0.015 var(--hue));
-  --codeblock-topbar-bg: oklch(0.3 0.02 var(--hue));
+
+  --inline-code-bg: #1a1a1a;
+  --inline-code-color: #f5f5f5;
+  --selection-bg: rgba(26, 26, 26, 0.12);
+  --codeblock-selection: rgba(26, 26, 26, 0.12);
+  --codeblock-bg: #1a1a1a;
+  --codeblock-topbar-bg: #262626;
+
   --license-block-bg: rgba(0,0,0,0.03);
-  --link-underline: oklch(0.93 0.04 var(--hue));
-  --link-hover: oklch(0.95 0.025 var(--hue));
-  --link-active: oklch(0.9 0.05 var(--hue));
-  --float-panel-bg: white;
+
+  --link-underline: #1a1a1a;
+  --link-hover: #404040;
+  --link-active: #000000;
+
+  --float-panel-bg: #ffffff;
+
   --scrollbar-bg-light: rgba(0,0,0,0.4);
   --scrollbar-bg-hover-light: rgba(0,0,0,0.5);
   --scrollbar-bg-active-light: rgba(0,0,0,0.6);
-  --scrollbar-bg-dark: rgba(255,255,255,0.4);
-  --scrollbar-bg-hover-dark: rgba(255,255,255,0.5);
-  --scrollbar-bg-active-dark: rgba(255,255,255,0.6);
+
   --scrollbar-bg: var(--scrollbar-bg-light);
   --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
   --scrollbar-bg-active: var(--scrollbar-bg-active-light);
-  --color-selection-bar: linear-gradient(to right, oklch(0.8 0.1 0), oklch(0.8 0.1 30), oklch(0.8 0.1 60), oklch(0.8 0.1 90), oklch(0.8 0.1 120), oklch(0.8 0.1 150), oklch(0.8 0.1 180), oklch(0.8 0.1 210), oklch(0.8 0.1 240), oklch(0.8 0.1 270), oklch(0.8 0.1 300), oklch(0.8 0.1 330), oklch(0.8 0.1 360));
+
   --display-light-icon: 1;
   --display-dark-icon: 0;
-  --admonitions-color-tip: oklch(0.7 0.14 180);
-  --admonitions-color-note: oklch(0.7 0.14 250);
-  --admonitions-color-important: oklch(0.7 0.14 310);
-  --admonitions-color-warning: oklch(0.7 0.14 60);
-  --admonitions-color-caution: oklch(0.6 0.2 25);
-  --toc-badge-bg: oklch(0.89 0.05 var(--hue));
-  --toc-btn-hover: oklch(0.926 0.015 var(--hue));
-  --toc-btn-active: oklch(0.9 0.015 var(--hue));
+
+  --admonitions-color-tip: #1a1a1a;
+  --admonitions-color-note: #1a1a1a;
+  --admonitions-color-important: #1a1a1a;
+  --admonitions-color-warning: #1a1a1a;
+  --admonitions-color-caution: #1a1a1a;
+
+  --toc-badge-bg: #f5f5f5;
+  --toc-btn-hover: #e5e5e5;
+  --toc-btn-active: #d4d4d4;
   --toc-width: calc((100vw - var(--page-width)) / 2 - 1rem);
-  --toc-item-active: oklch(0.7 0.13 var(--hue));
+  --toc-item-active: #1a1a1a;
+
+  /* Border color */
+  --border-color: #e5e5e5;
 }
+
+/* Dark Mode - IDEA Classic Dark Theme */
 :root.dark {
-  --primary: oklch(0.75 0.14 var(--hue));
-  --page-bg: oklch(0.16 0.014 var(--hue));
-  --page-bg-pure: oklch(0.04 0.01 var(--hue));
-  --card-bg: oklch(0.23 0.015 var(--hue));
-  --btn-content: oklch(0.75 0.1 var(--hue));
-  --btn-regular-bg: oklch(0.33 0.035 var(--hue));
-  --btn-regular-bg-hover: oklch(0.38 0.04 var(--hue));
-  --btn-regular-bg-active: oklch(0.43 0.045 var(--hue));
-  --btn-plain-bg-hover: oklch(0.3 0.035 var(--hue));
-  --btn-plain-bg-active: oklch(0.27 0.025 var(--hue));
-  --btn-card-bg-hover: oklch(0.3 0.03 var(--hue));
-  --btn-card-bg-active: oklch(0.35 0.035 var(--hue));
-  --line-divider: rgba(255,255,255,0.08);
-  --line-color: rgba(255,255,255,0.1);
-  --meta-divider: rgba(255,255,255,0.2);
-  --selection-bg: oklch(0.4 0.08 var(--hue));
-  --codeblock-bg: oklch(0.17 0.015 var(--hue));
-  --codeblock-topbar-bg: oklch(0.12 0.015 var(--hue));
-  --license-block-bg: var(--codeblock-bg);
-  --link-underline: oklch(0.4 0.08 var(--hue));
-  --link-hover: oklch(0.4 0.08 var(--hue));
-  --link-active: oklch(0.35 0.07 var(--hue));
-  --float-panel-bg: oklch(0.19 0.015 var(--hue));
-  --scrollbar-bg: var(--scrollbar-bg-dark);
-  --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
-  --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
-  --color-selection-bar: linear-gradient(to right, oklch(0.7 0.1 0), oklch(0.7 0.1 30), oklch(0.7 0.1 60), oklch(0.7 0.1 90), oklch(0.7 0.1 120), oklch(0.7 0.1 150), oklch(0.7 0.1 180), oklch(0.7 0.1 210), oklch(0.7 0.1 240), oklch(0.7 0.1 270), oklch(0.7 0.1 300), oklch(0.7 0.1 330), oklch(0.7 0.1 360));
+  --primary: #569cd6;
+  --primary-hover: #6eb1e6;
+  --primary-active: #4088c4;
+
+  /* Text Colors - IDEA Style */
+  --text-color: #d4d4d4;
+  --text-muted: #808080;
+
+  /* Background - IDEA Classic Dark */
+  --page-bg: #1e1e1e;
+  --page-bg-pure: #252526;
+  --card-bg: #252526;
+
+  --btn-content: #d4d4d4;
+
+  --btn-regular-bg: #2d2d2d;
+  --btn-regular-bg-hover: #3c3c3c;
+  --btn-regular-bg-active: #4a4a4a;
+
+  --btn-plain-bg-hover: #2d2d2d;
+  --btn-plain-bg-active: #262626;
+
+  --btn-card-bg-hover: #2d2d2d;
+  --btn-card-bg-active: #3c3c3c;
+
+  --btn-nav-bg: #2d2d2d;
+  --btn-nav-bg-hover: #3c3c3c;
+  --btn-nav-bg-active: #4a4a4a;
+
+  --btn-category-bg: #2d2d2d;
+  --btn-category-bg-hover: #3c3c3c;
+  --btn-category-bg-active: #4a4a4a;
+
+  --btn-tag-bg: #2d2d2d;
+  --btn-tag-bg-hover: #3c3c3c;
+  --btn-tag-bg-active: #4a4a4a;
+
+  --deep-text: #808080;
+
+  --title-active: #569cd6;
+
+  --line-divider: rgba(86, 156, 214, 0.15);
+
+  --line-color: rgba(86, 156, 214, 0.2);
+  --meta-divider: rgba(255, 255, 255, 0.15);
+
+  --selection-bg: rgba(86, 156, 214, 0.3);
+  --codeblock-selection: rgba(86, 156, 214, 0.3);
+  --codeblock-bg: #1e1e1e;
+  --codeblock-topbar-bg: #252526;
+
+  --license-block-bg: #1e1e1e;
+
+  --link-underline: #569cd6;
+  --link-hover: #6eb1e6;
+  --link-active: #4088c4;
+
+  --float-panel-bg: rgba(37, 37, 38, 0.98);
+
+  --scrollbar-bg: rgba(86, 156, 214, 0.25);
+  --scrollbar-bg-hover: rgba(86, 156, 214, 0.4);
+  --scrollbar-bg-active: rgba(86, 156, 214, 0.55);
+
   --display-light-icon: 0;
   --display-dark-icon: 1;
-  --admonitions-color-tip: oklch(0.75 0.14 180);
-  --admonitions-color-note: oklch(0.75 0.14 250);
-  --admonitions-color-important: oklch(0.75 0.14 310);
-  --admonitions-color-warning: oklch(0.75 0.14 60);
-  --admonitions-color-caution: oklch(0.65 0.2 25);
-  --toc-badge-bg: var(--btn-regular-bg);
-  --toc-btn-hover: oklch(0.22 0.02 var(--hue));
-  --toc-btn-active: oklch(0.25 0.02 var(--hue));
-  --toc-item-active: oklch(0.35 0.07 var(--hue));
+
+  --admonitions-color-tip: #569cd6;
+  --admonitions-color-note: #6eb1e6;
+  --admonitions-color-important: #ce9178;
+  --admonitions-color-warning: #dcdcaa;
+  --admonitions-color-caution: #f14c4c;
+
+  --toc-badge-bg: #2d2d2d;
+  --toc-btn-hover: #3c3c3c;
+  --toc-btn-active: #4a4a4a;
+  --toc-item-active: #569cd6;
+
+  /* Border color - IDEA style */
+  --border-color: #3c3c3c;
 }
+
 /* Font families */
 :root {
+  /* Base fonts */
   --font-sans: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Merriweather', 'Noto Serif SC', Georgia, serif;
+  --font-serif: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-poppins: 'Poppins', 'Noto Sans SC', sans-serif;
-  --font-source-han: 'Source Han Sans', 'Noto Sans SC', sans-serif;
-/* New font options */
-  --font-lishu: 'LiSu', 'STLiti', 'FangSong', serif;
-  --font-kaikai: 'KaiTi', 'STKaiti', '楷体', serif;
-  --font-source-code: 'Source Code Pro', 'JetBrains Mono', monospace;
-  --font-merriweather: 'Merriweather', 'Noto Serif SC', Georgia, serif;
+
+  /* Display fonts - distinctive for headings */
+  --font-display: 'Playfair Display', 'Noto Serif SC', serif;
+  --font-poppins: 'Poppins', 'Noto Sans SC', system-ui, sans-serif;
+  --font-source-han: 'Noto Sans SC', system-ui, sans-serif;
+  --font-lishu: 'Noto Sans SC', system-ui, sans-serif;
+  --font-kaikai: 'Noto Sans SC', system-ui, sans-serif;
+  --font-source-code: 'JetBrains Mono', monospace;
+  --font-merriweather: 'Merriweather', 'Noto Serif SC', serif;
+
+  /* Elegant editorial style - recommended */
+  --font-body: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
 }
+
+/* Font size scale - golden ratio based */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: 1.953125rem;
+  --text-3xl: 2.44140625rem;
+  --text-4xl: 3.052734375rem;
+
+  /* Line heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+  --leading-loose: 1.9;
+}
+
 :root.font-sans {
   --font-body: var(--font-sans);
 }
@@ -177,7 +236,6 @@
 :root.font-source-han {
   --font-body: var(--font-source-han);
 }
-/* New font classes */
 :root.font-system {
   --font-body: var(--font-sans);
 }
@@ -193,7 +251,47 @@
 :root.font-merriweather {
   --font-body: var(--font-merriweather);
 }
+
 body {
   font-family: var(--font-body, var(--font-sans));
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
 }
 
+/* Headings use display font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+:root.font-sans {
+  --font-body: var(--font-sans);
+}
+:root.font-serif {
+  --font-body: var(--font-serif);
+}
+:root.font-mono {
+  --font-body: var(--font-mono);
+}
+:root.font-poppins {
+  --font-body: var(--font-poppins);
+}
+:root.font-source-han {
+  --font-body: var(--font-source-han);
+}
+:root.font-system {
+  --font-body: var(--font-sans);
+}
+:root.font-lishu {
+  --font-body: var(--font-lishu);
+}
+:root.font-kaikai {
+  --font-body: var(--font-kaikai);
+}
+:root.font-source-code {
+  --font-body: var(--font-source-code);
+}
+:root.font-merriweather {
+  --font-body: var(--font-merriweather);
+}

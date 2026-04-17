@@ -4,27 +4,26 @@ import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 
 interface Props {
-	id: string;
-	name?: string;
-	isCollapsed?: boolean;
-	collapsedHeight?: string;
-	class?: string;
-	style?: string;
+    id: string;
+    name?: string;
+    isCollapsed?: boolean;
+    collapsedHeight?: string;
+    class?: string;
+    style?: string;
 }
 const { id, name, isCollapsed, collapsedHeight, style } = Astro.props;
 const className = Astro.props.class;
 ---
-<widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
-    <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
-        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
-        before:absolute before:left-[-16px] before:top-[5.5px]">{name}</div>
-    <div id={id} class:list={["collapse-wrapper px-4 overflow-hidden", {"collapsed": isCollapsed}]}>
+<widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 widget-layout " + className} style={style}>
+    {name && <div class="widget-title">{name}</div>}
+    <div id={id} class:list={["collapse-wrapper overflow-hidden", {"collapsed": isCollapsed}]}>
         <slot></slot>
     </div>
-    {isCollapsed && <div class="expand-btn px-4 -mb-2">
-        <button class="btn-plain rounded-lg w-full h-9">
-            <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
-                <Icon name="material-symbols:more-horiz" class="text-[1.75rem]"></Icon> {i18n(I18nKey.more)}
+    {isCollapsed && <div class="expand-btn -mb-2">
+        <button class="btn-widget-expand">
+            <div class="flex items-center justify-center gap-2">
+                <Icon name="material-symbols:more-horiz" class="text-[1.75rem]"></Icon>
+                <span>{i18n(I18nKey.more)}</span>
             </div>
         </button>
     </div>}
@@ -58,3 +57,45 @@ const className = Astro.props.class;
         customElements.define("widget-layout", WidgetLayout);
     }
 </script>
+
+<style>
+    .widget-layout {
+        padding: 1rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .widget-layout:hover {
+        border-color: var(--primary);
+    }
+
+    .widget-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-widget-expand {
+        width: 100%;
+        height: 2.25rem;
+        border-radius: 0.375rem;
+        background: var(--btn-regular-bg);
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-widget-expand:hover {
+        color: var(--primary);
+        background: var(--btn-regular-bg-hover);
+        border-color: var(--primary);
+    }
+</style>

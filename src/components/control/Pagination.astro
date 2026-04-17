@@ -57,20 +57,20 @@ const getPageUrl = (p: number) => {
            {"disabled": page.url.prev == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-left-rounded" class="text-[1.75rem]"></Icon>
+        <Icon name="material-symbols:chevron-left-rounded" class="text-[1.25rem]"></Icon>
     </a>
-    <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
+    <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 text-xs font-medium">
         {pages.map((p) => {
             if (p == HIDDEN)
-                return <Icon name="material-symbols:more-horiz" class="mx-1"/>;
+                return <Icon name="material-symbols:more-horiz" class="mx-1 text-sm"/>
             if (p == page.currentPage)
                 return <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
-                    font-bold text-white dark:text-black/70"
+                    font-semibold text-white dark:text-black/70 text-xs"
                 >
                     {p}
                 </div>
             return <a href={url(getPageUrl(p))} aria-label={`Page ${p}`}
-                class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
+                class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85] text-xs"
             >{p}</a>
         })}
     </div>
@@ -79,6 +79,6 @@ const getPageUrl = (p: number) => {
            {"disabled": page.url.next == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]"></Icon>
+        <Icon name="material-symbols:chevron-right-rounded" class="text-[1.25rem]"></Icon>
     </a>
 </div>
