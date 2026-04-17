@@ -4,19 +4,19 @@
 
 这是一个基于 [Astro](https://astro.build/) 框架构建的个人技术博客，专注于：
 
-- **前端开发**：Vue.js、React、Astro 等框架实践
-- **后端技术**：Node.js、Python、Go 等服务端开发
-- **DevOps**：Docker、Nginx、CI/CD 等运维实践
-- **AI 与机器学习**：大模型应用、自动化工具探索
+- **全栈技术**：Vue.js、Spring、SpringCloud、Dubbo、FastAPI 等框架实践
+- **后端技术**：Java、Python 等服务端开发
+- **DevOps**：Docker、Nginx、CI/CD、K8S、可观测平台 等运维实践
+- **AI 人工智能**：大模型应用、智能体等
 - **编程心得**：日常开发中的踩坑记录与经验总结
 
 ## 技术栈
 
 | 类别 | 技术 |
 |------|------|
-| 框架 | Astro 5.x |
-| 样式 | Tailwind CSS |
-| 部署 | 静态资源 + Nginx |
+| 编程语言 | Java、Python |
+| 框架 | Spring、Spring Cloud、Spring AI Alibaba |
+| 云原生 | Docker、K8S |
 
 ## 关于我
 
