@@ -1,0 +1,37 @@
+---
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getCollection } from "astro:content";
+
+const newsList = await getCollection("ai-news", ({ data }) => !data.draft);
+newsList.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+---
+
+<MainGridLayout title={i18n(I18nKey.aiNews)}>
+    <div class="flex flex-col gap-4">
+        {newsList.map((item) => (
+            <a
+                href={item.data.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block p-4 rounded-lg border border-[var(--border-color)] hover:border-[var(--primary)] transition-colors"
+            >
+                <div class="text-sm text-[var(--text-muted)] mb-1">
+                    {item.data.source} · {item.data.published.toLocaleDateString("zh_CN")}
+                </div>
+                <h3 class="text-lg font-semibold mb-1">{item.data.title}</h3>
+                {item.data.description && (
+                    <p class="text-sm text-[var(--text-muted)]">{item.data.description}</p>
+                )}
+                {item.data.tags.length > 0 && (
+                    <div class="flex gap-2 mt-2">
+                        {item.data.tags.map((tag) => (
+                            <span class="text-xs px-2 py-0.5 rounded bg-[var(--primary)]/20 text-[var(--primary)]">{tag}</span>
+                        ))}
+                    </div>
+                )}
+            </a>
+        ))}
+    </div>
+</MainGridLayout>
