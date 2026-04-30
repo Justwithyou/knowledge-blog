@@ -1,16 +1,17 @@
 @tailwind components;
 
 @layer components {
-    /* card-base */
+    /* card-base - refined */
     .card-base {
         @apply rounded-lg overflow-hidden bg-[var(--card-bg)] transition;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-sm);
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
     }
     .card-shadow {
-        @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
+        @apply drop-shadow-[0_1px_3px_rgba(0,0,0,0.04)]
     }
     .expand-animation {
         @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
@@ -22,7 +23,6 @@
     }
     .link:hover {
         color: var(--link-hover);
-        text-shadow: 0 0 8px var(--link-hover);
     }
     .link-lg {
         @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
@@ -30,11 +30,11 @@
     }
     .link-lg:hover {
         color: var(--link-hover);
-        text-shadow: 0 0 8px var(--link-hover);
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none;
-        border: 1px solid var(--border-color);
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-lg;
+        border: 1px solid var(--border-subtle);
+        backdrop-filter: blur(12px);
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -46,7 +46,7 @@
     .btn-card {
         @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
         active:bg-[var(--btn-card-bg-active)];
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border-subtle);
     }
     .btn-card.disabled {
         @apply pointer-events-none text-black/10 dark:text-white/10
@@ -67,7 +67,7 @@
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
         text-[var(--btn-content)] dark:text-white/75;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border-subtle);
     }
 
     .link-underline {
@@ -117,7 +117,7 @@
     .meta-icon {
         @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
         text-[var(--btn-content)] mr-2;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border-subtle);
     }
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
@@ -139,11 +139,17 @@
 }
 
 ::selection {
-    background-color: var(--selection-bg);
-    color: var(--text-color);
+    background-color: var(--selection-bg) !important;
+    color: var(--text-color) !important;
 }
 
-/* Cyberpunk Scanline Effect - Dark Mode Only */
+.expressive-code ::selection,
+.expressive-code *::selection {
+    background-color: var(--codeblock-selection) !important;
+    color: var(--text-color) !important;
+}
+
+/* Subtle grain texture - Refined */
 :root.dark body::before {
     content: '';
     position: fixed;
@@ -151,59 +157,48 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(86, 156, 214, 0.01) 2px,
-        rgba(86, 156, 214, 0.01) 4px
-    );
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
     pointer-events: none;
     z-index: 9998;
-    animation: scanlines 10s linear infinite;
 }
 
-@keyframes scanlines {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 0 100px;
-    }
-}
-
-/* Neon glow pulse for accents */
-@keyframes neon-pulse {
+/* Subtle accent pulse */
+@keyframes subtle-pulse {
     0%, 100% {
         opacity: 1;
     }
     50% {
-        opacity: 0.8;
+        opacity: 0.85;
     }
 }
 
-/* Cursor glow effect */
+/* Cursor */
 :root.dark a, :root.dark button {
     cursor: pointer;
 }
 
-/* Scrollbar styling - IDEA style */
-:root.dark ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+/* Refined scrollbar styling */
+:root.dark ::-webkit-scrollbar,
+::scrollbar {
+    width: 5px;
+    height: 5px;
 }
 
-:root.dark ::-webkit-scrollbar-track {
+:root.dark ::-webkit-scrollbar-track,
+::scrollbar-track {
     background: transparent;
 }
 
-:root.dark ::-webkit-scrollbar-thumb {
-    background: #5a5a5a;
+:root.dark ::-webkit-scrollbar-thumb,
+::scrollbar-thumb {
+    background: var(--scrollbar-bg);
     border-radius: 3px;
 }
 
-:root.dark ::-webkit-scrollbar-thumb:hover {
-    background: #707070;
+:root.dark ::-webkit-scrollbar-thumb:hover,
+::scrollbar-thumb:hover {
+    background: var(--scrollbar-bg-hover);
 }
 
 .dash-line {
@@ -237,12 +232,12 @@
   }
 }
 
-/* Code block styling - IDEA style */
+/* Code block styling - refined */
 :root.dark pre, :root.dark code {
-    border: 1px solid #3c3c3c;
-    border-radius: 3px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
 }
 
 :root.dark pre:hover, :root.dark code:hover {
-    border-color: #569cd6;
+    border-color: var(--border-color);
 }

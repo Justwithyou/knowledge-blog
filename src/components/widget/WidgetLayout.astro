@@ -4,12 +4,12 @@ import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 
 interface Props {
-    id: string;
-    name?: string;
-    isCollapsed?: boolean;
-    collapsedHeight?: string;
-    class?: string;
-    style?: string;
+	id: string;
+	name?: string;
+	isCollapsed?: boolean;
+	collapsedHeight?: string;
+	class?: string;
+	style?: string;
 }
 const { id, name, isCollapsed, collapsedHeight, style } = Astro.props;
 const className = Astro.props.class;
@@ -21,10 +21,7 @@ const className = Astro.props.class;
     </div>
     {isCollapsed && <div class="expand-btn -mb-2">
         <button class="btn-widget-expand">
-            <div class="flex items-center justify-center gap-2">
-                <Icon name="material-symbols:more-horiz" class="text-[1.75rem]"></Icon>
-                <span>{i18n(I18nKey.more)}</span>
-            </div>
+            <Icon name="material-symbols:keyboard-arrow-down" class="text-[1.25rem] expand-icon"></Icon>
         </button>
     </div>}
 </widget-layout>
@@ -45,11 +42,20 @@ const className = Astro.props.class;
 
             const id = this.dataset.id;
             const btn = this.querySelector('.expand-btn');
-            const wrapper = this.querySelector(`#${id}`)
+            const wrapper = this.querySelector(`#${id}`);
+            const expandIcon = btn?.querySelector('.expand-icon');
+            let expanded = false;
+
             btn!.addEventListener('click', () => {
-                wrapper!.classList.remove('collapsed');
-                btn!.classList.add('hidden');
-            })
+                expanded = !expanded;
+                if (expanded) {
+                    wrapper!.classList.remove('collapsed');
+                    expandIcon?.classList.add('rotate-180');
+                } else {
+                    wrapper!.classList.add('collapsed');
+                    expandIcon?.classList.remove('rotate-180');
+                }
+            });
         }
     }
 
@@ -60,42 +66,56 @@ const className = Astro.props.class;
 
 <style>
     .widget-layout {
-        padding: 1rem;
+        padding: 1.125rem;
         background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
+        border: 1px solid var(--border-subtle);
+        border-radius: 0.625rem;
+        transition: all 0.25s ease;
+        box-shadow: var(--shadow-sm);
     }
 
     .widget-layout:hover {
-        border-color: var(--primary);
+        border-color: var(--border-color);
+        box-shadow: var(--shadow-md);
     }
 
     .widget-title {
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-weight: 600;
-        color: var(--primary);
+        color: var(--text-muted);
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.75rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--border-color);
+        letter-spacing: 0.08em;
+        margin-bottom: 0.875rem;
+        padding-bottom: 0.625rem;
+        border-bottom: 1px solid var(--border-subtle);
     }
 
     .btn-widget-expand {
         width: 100%;
         height: 2.25rem;
-        border-radius: 0.375rem;
+        border-radius: 0.5rem;
         background: var(--btn-regular-bg);
         color: var(--text-muted);
-        font-size: 0.875rem;
-        transition: all 0.3s ease;
-        border: 1px solid var(--border-color);
+        font-size: 0.8125rem;
+        transition: all 0.2s ease;
+        border: 1px solid var(--border-subtle);
+        letter-spacing: 0.01em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .btn-widget-expand:hover {
-        color: var(--primary);
+        color: var(--text-color);
         background: var(--btn-regular-bg-hover);
-        border-color: var(--primary);
+        border-color: var(--border-color);
+    }
+
+    .expand-icon {
+        transition: transform 0.25s ease;
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
     }
 </style>

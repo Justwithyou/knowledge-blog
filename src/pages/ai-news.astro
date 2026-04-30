@@ -1,11 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getCollection } from "astro:content";
 
 const newsList = await getCollection("ai-news", ({ data }) => !data.draft);
-newsList.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+newsList.sort(
+	(a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
 ---
 
 <MainGridLayout title={i18n(I18nKey.aiNews)}>

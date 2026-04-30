@@ -5,7 +5,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
-import { getDir, getPostUrlBySlug } from "@utils/url-utils";
+import { getDir, getPostUrlBySlug, url } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import { licenseConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
@@ -46,10 +46,27 @@ const jsonLd = {
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-4 md:px-6 pt-6 pb-4 relative w-full ",
             {}
         ]}>
+            <!-- Breadcrumb navigation -->
+            <nav class="breadcrumb onload-animation mb-4" aria-label="Breadcrumb">
+                <a href={url('/')} class="breadcrumb-link">
+                    <Icon name="material-symbols:home-rounded" class="text-[1rem]"></Icon>
+                    <span>主页</span>
+                </a>
+                <Icon name="material-symbols:chevron-right-rounded" class="breadcrumb-separator text-[0.875rem]"></Icon>
+                {entry.data.category && (
+                    <>
+                        <a href={url('/archive/')} class="breadcrumb-link">{entry.data.category}</a>
+                        <Icon name="material-symbols:chevron-right-rounded" class="breadcrumb-separator text-[0.875rem]"></Icon>
+                    </>
+                )}
+                <span class="breadcrumb-current">{entry.data.title}</span>
+            </nav>
+
             <!-- word count and reading time -->
             <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
                 <div class="flex flex-row items-center">
@@ -75,8 +92,6 @@ const jsonLd = {
                     class="transition w-full block font-bold mb-3
                     text-2xl md:text-[2rem]/[2.5rem]
                     text-black/90 dark:text-white/90
-                    before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                    before:absolute before:top-[0.6rem] before:left-[-0.75rem]
                 ">
                     {entry.data.title}
                 </div>
@@ -130,4 +145,78 @@ const jsonLd = {
         </a>
     </div>
 
+<script>
+    // Reading progress bar
+    const progressBar = document.getElementById('reading-progress');
+    const postContainer = document.getElementById('post-container');
+
+    if (progressBar && postContainer) {
+        const updateProgress = () => {
+            const rect = postContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.scrollY;
+
+            // Calculate progress based on how much of the post has been scrolled past
+            const postTop = rect.top + scrollTop;
+            const postHeight = rect.height;
+            const scrolledPast = scrollTop - postTop + windowHeight * 0.3;
+
+            if (scrolledPast > 0) {
+                const progress = Math.min((scrolledPast / postHeight) * 100, 100);
+                progressBar.style.width = `${progress}%`;
+            } else {
+                progressBar.style.width = '0%';
+            }
+        };
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+</script>
+
 </MainGridLayout>
+
+<style>
+    /* Breadcrumb navigation */
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-link {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.375rem;
+        margin: -0.25rem -0.5rem;
+    }
+
+    .breadcrumb-link:hover {
+        color: var(--text-color);
+        background: var(--btn-plain-bg-hover);
+    }
+
+    .breadcrumb-separator {
+        color: var(--meta-divider);
+        flex-shrink: 0;
+    }
+
+    .breadcrumb-current {
+        color: var(--text-color);
+        font-weight: 500;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>

@@ -3,78 +3,78 @@
   --radius-large: 1rem;
   --content-delay: 150ms;
 
-  /* Deep Black Accent */
+  /* Deep Black Accent - Refined */
   --primary: #1a1a1a;
-  --primary-hover: #404040;
+  --primary-hover: #3d3d3d;
   --primary-active: #000000;
 
-  /* Text Colors - Light Mode */
+  /* Text Colors - Light Mode - More refined */
   --text-color: #1a1a1a;
-  --text-muted: #666666;
+  --text-muted: #71717a;
 
-  /* Color Scheme - Minimalist Developer Style */
-  --page-bg: #fafafa;
+  /* Color Scheme - Refined Editorial Minimalist */
+  --page-bg: #fafaf9;
   --page-bg-pure: #ffffff;
   --card-bg: #ffffff;
 
   --btn-content: #1a1a1a;
 
-  --btn-regular-bg: #f5f5f5;
-  --btn-regular-bg-hover: #e5e5e5;
-  --btn-regular-bg-active: #d4d4d4;
+  --btn-regular-bg: #f4f4f5;
+  --btn-regular-bg-hover: #e4e4e7;
+  --btn-regular-bg-active: #d4d4d8;
 
-  --btn-plain-bg-hover: #f5f5f5;
-  --btn-plain-bg-active: #e5e5e5;
+  --btn-plain-bg-hover: #f4f4f5;
+  --btn-plain-bg-active: #e4e4e7;
 
-  --btn-card-bg-hover: #fafafa;
-  --btn-card-bg-active: #f5f5f5;
+  --btn-card-bg-hover: #fafaf9;
+  --btn-card-bg-active: #f4f4f5;
 
   --enter-btn-bg: var(--btn-regular-bg);
   --enter-btn-bg-hover: var(--btn-regular-bg-hover);
   --enter-btn-bg-active: var(--btn-regular-bg-active);
 
   /* Navigation bar buttons */
-  --btn-nav-bg: #f5f5f5;
-  --btn-nav-bg-hover: #e5e5e5;
-  --btn-nav-bg-active: #d4d4d4;
+  --btn-nav-bg: #f4f4f5;
+  --btn-nav-bg-hover: #e4e4e7;
+  --btn-nav-bg-active: #d4d4d8;
 
   /* Category buttons */
-  --btn-category-bg: #f5f5f5;
-  --btn-category-bg-hover: #e5e5e5;
-  --btn-category-bg-active: #d4d4d4;
+  --btn-category-bg: #f4f4f5;
+  --btn-category-bg-hover: #e4e4e7;
+  --btn-category-bg-active: #d4d4d8;
 
   /* Tag buttons */
-  --btn-tag-bg: #f5f5f5;
-  --btn-tag-bg-hover: #e5e5e5;
-  --btn-tag-bg-active: #d4d4d4;
+  --btn-tag-bg: #f4f4f5;
+  --btn-tag-bg-hover: #e4e4e7;
+  --btn-tag-bg-active: #d4d4d8;
 
-  --deep-text: #404040;
+  --deep-text: #52525b;
 
   --title-active: #1a1a1a;
 
-  --line-divider: rgba(0,0,0,0.08);
+  --line-divider: rgba(0,0,0,0.06);
 
-  --line-color: rgba(0,0,0,0.1);
-  --meta-divider: rgba(0,0,0,0.2);
+  --line-color: rgba(0,0,0,0.08);
+  --meta-divider: rgba(0,0,0,0.15);
 
-  --inline-code-bg: #1a1a1a;
-  --inline-code-color: #f5f5f5;
-  --selection-bg: rgba(26, 26, 26, 0.12);
-  --codeblock-selection: rgba(26, 26, 26, 0.12);
-  --codeblock-bg: #1a1a1a;
-  --codeblock-topbar-bg: #262626;
+  --inline-code-bg: #27272a;
+  --inline-code-color: #fafafa;
+  --selection-bg: rgba(26, 26, 26, 0.08);
+  --codeblock-selection: rgba(26, 26, 26, 0.08);
+  --codeblock-bg: #27272a;
+  --codeblock-topbar-bg: #18181b;
 
-  --license-block-bg: rgba(0,0,0,0.03);
+  --license-block-bg: rgba(0,0,0,0.02);
 
   --link-underline: #1a1a1a;
-  --link-hover: #404040;
+  --link-hover: #52525b;
   --link-active: #000000;
 
-  --float-panel-bg: #ffffff;
+  --float-panel-bg: rgba(255, 255, 255, 0.92);
 
-  --scrollbar-bg-light: rgba(0,0,0,0.4);
-  --scrollbar-bg-hover-light: rgba(0,0,0,0.5);
-  --scrollbar-bg-active-light: rgba(0,0,0,0.6);
+  --scrollbar-bg-light: rgba(0,0,0,0.35);
+  --scrollbar-bg-hover-light: rgba(0,0,0,0.45);
+  --scrollbar-bg-active-light: rgba(0,0,0,0.55);
 
   --scrollbar-bg: var(--scrollbar-bg-light);
   --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
@@ -89,97 +89,105 @@
   --admonitions-color-warning: #1a1a1a;
   --admonitions-color-caution: #1a1a1a;
 
-  --toc-badge-bg: #f5f5f5;
-  --toc-btn-hover: #e5e5e5;
-  --toc-btn-active: #d4d4d4;
-  --toc-width: calc((100vw - var(--page-width)) / 2 - 1rem);
+  --toc-badge-bg: #f4f4f5;
+  --toc-btn-hover: #e4e4e7;
+  --toc-btn-active: #d4d4d8;
+  --toc-width: max(18rem, calc((100vw - var(--page-width)) / 2));
   --toc-item-active: #1a1a1a;
 
-  /* Border color */
-  --border-color: #e5e5e5;
+  /* Refined border and shadow */
+  --border-color: #e4e4e7;
+  --border-subtle: rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
 }
 
-/* Dark Mode - IDEA Classic Dark Theme */
+/* Dark Mode - Refined Editorial Dark */
 :root.dark {
-  --primary: #569cd6;
-  --primary-hover: #6eb1e6;
-  --primary-active: #4088c4;
+  --primary: #e4e4e7;
+  --primary-hover: #f4f4f5;
+  --primary-active: #ffffff;
 
-  /* Text Colors - IDEA Style */
-  --text-color: #d4d4d4;
-  --text-muted: #808080;
+  /* Text Colors - Refined */
+  --text-color: #e4e4e7;
+  --text-muted: #a1a1aa;
 
-  /* Background - IDEA Classic Dark */
-  --page-bg: #1e1e1e;
-  --page-bg-pure: #252526;
-  --card-bg: #252526;
+  /* Background - Deep Charcoal */
+  --page-bg: #09090b;
+  --page-bg-pure: #18181b;
+  --card-bg: #18181b;
 
-  --btn-content: #d4d4d4;
+  --btn-content: #e4e4e7;
 
-  --btn-regular-bg: #2d2d2d;
-  --btn-regular-bg-hover: #3c3c3c;
-  --btn-regular-bg-active: #4a4a4a;
+  --btn-regular-bg: #27272a;
+  --btn-regular-bg-hover: #3f3f46;
+  --btn-regular-bg-active: #52525b;
 
-  --btn-plain-bg-hover: #2d2d2d;
-  --btn-plain-bg-active: #262626;
+  --btn-plain-bg-hover: #27272a;
+  --btn-plain-bg-active: #1f1f23;
 
-  --btn-card-bg-hover: #2d2d2d;
-  --btn-card-bg-active: #3c3c3c;
+  --btn-card-bg-hover: #27272a;
+  --btn-card-bg-active: #3f3f46;
 
-  --btn-nav-bg: #2d2d2d;
-  --btn-nav-bg-hover: #3c3c3c;
-  --btn-nav-bg-active: #4a4a4a;
+  --btn-nav-bg: #27272a;
+  --btn-nav-bg-hover: #3f3f46;
+  --btn-nav-bg-active: #52525b;
 
-  --btn-category-bg: #2d2d2d;
-  --btn-category-bg-hover: #3c3c3c;
-  --btn-category-bg-active: #4a4a4a;
+  --btn-category-bg: #27272a;
+  --btn-category-bg-hover: #3f3f46;
+  --btn-category-bg-active: #52525b;
 
-  --btn-tag-bg: #2d2d2d;
-  --btn-tag-bg-hover: #3c3c3c;
-  --btn-tag-bg-active: #4a4a4a;
+  --btn-tag-bg: #27272a;
+  --btn-tag-bg-hover: #3f3f46;
+  --btn-tag-bg-active: #52525b;
 
-  --deep-text: #808080;
+  --deep-text: #a1a1aa;
 
-  --title-active: #569cd6;
+  --title-active: #fafafa;
 
-  --line-divider: rgba(86, 156, 214, 0.15);
+  --line-divider: rgba(228, 228, 231, 0.08);
 
-  --line-color: rgba(86, 156, 214, 0.2);
-  --meta-divider: rgba(255, 255, 255, 0.15);
+  --line-color: rgba(228, 228, 231, 0.1);
+  --meta-divider: rgba(255, 255, 255, 0.2);
 
-  --selection-bg: rgba(86, 156, 214, 0.3);
-  --codeblock-selection: rgba(86, 156, 214, 0.3);
-  --codeblock-bg: #1e1e1e;
-  --codeblock-topbar-bg: #252526;
+  --selection-bg: rgba(228, 228, 231, 0.15);
+  --codeblock-selection: rgba(228, 228, 231, 0.15);
+  --codeblock-bg: #09090b;
+  --codeblock-topbar-bg: #18181b;
 
-  --license-block-bg: #1e1e1e;
+  --license-block-bg: rgba(255,255,255,0.02);
 
-  --link-underline: #569cd6;
-  --link-hover: #6eb1e6;
-  --link-active: #4088c4;
+  --link-underline: #e4e4e7;
+  --link-hover: #fafafa;
+  --link-active: #ffffff;
 
-  --float-panel-bg: rgba(37, 37, 38, 0.98);
+  --float-panel-bg: rgba(24, 24, 27, 0.92);
 
-  --scrollbar-bg: rgba(86, 156, 214, 0.25);
-  --scrollbar-bg-hover: rgba(86, 156, 214, 0.4);
-  --scrollbar-bg-active: rgba(86, 156, 214, 0.55);
+  --scrollbar-bg: rgba(228, 228, 231, 0.2);
+  --scrollbar-bg-hover: rgba(228, 228, 231, 0.35);
+  --scrollbar-bg-active: rgba(228, 228, 231, 0.5);
 
   --display-light-icon: 0;
   --display-dark-icon: 1;
 
-  --admonitions-color-tip: #569cd6;
-  --admonitions-color-note: #6eb1e6;
-  --admonitions-color-important: #ce9178;
-  --admonitions-color-warning: #dcdcaa;
-  --admonitions-color-caution: #f14c4c;
+  --admonitions-color-tip: #a1a1aa;
+  --admonitions-color-note: #a1a1aa;
+  --admonitions-color-important: #a1a1aa;
+  --admonitions-color-warning: #fbbf24;
+  --admonitions-color-caution: #f87171;
 
-  --toc-badge-bg: #2d2d2d;
-  --toc-btn-hover: #3c3c3c;
-  --toc-btn-active: #4a4a4a;
-  --toc-item-active: #569cd6;
+  --toc-badge-bg: #27272a;
+  --toc-btn-hover: #3f3f46;
+  --toc-btn-active: #52525b;
+  --toc-item-active: #e4e4e7;
 
-  /* Border color - IDEA style */
-  --border-color: #3c3c3c;
+  /* Border and shadow - refined dark */
+  --border-color: #27272a;
+  --border-subtle: rgba(255,255,255,0.04);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
 }
 
 /* Font families */

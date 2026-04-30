@@ -11,7 +11,6 @@ import { siteConfig } from "../config";
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
-	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
 import Layout from "./Layout.astro";
 
@@ -37,7 +36,7 @@ const hasBannerCredit =
 const hasBannerLink = !!siteConfig.banner.credit.url;
 
 const mainPanelTop = siteConfig.banner.enable
-	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
+	? `calc(4rem + var(--banner-height-home) + 1.5rem)`
 	: "5.5rem";
 ---
 
@@ -52,19 +51,24 @@ const mainPanelTop = siteConfig.banner.enable
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
-    <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
+{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute z-10 w-full transition duration-700 overflow-hidden" style={`top: 4rem; height: var(--banner-height-home);`}>
+    <!-- Image -->
+    <ImageWrapper id="banner" alt="Banner image of the blog" class="object-cover w-full h-full transition duration-700 absolute inset-0 z-0"
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
     </ImageWrapper>
+    <!-- Bottom fade to blend with content -->
+    <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[var(--page-bg)] to-transparent z-10"></div>
 </div>}
 
 <!-- Main content -->
 <div class="absolute w-full z-30 pointer-events-none" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
-        <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[18rem_1fr] lg:grid-rows-[auto]
-    mx-auto gap-6 px-4 md:px-6"
+        <div id="main-grid" class:list={["transition duration-700 w-full left-0 right-0 grid mx-auto gap-8 px-6 md:px-8",
+            "grid-cols-[18rem_1fr] lg:grid-rows-[auto]",
+            { "lg:grid-cols-[18rem_1fr_18rem]": siteConfig.toc.enable }
+        ]}
         >
             <!-- Banner image credit -->
             {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
@@ -89,6 +93,20 @@ const mainPanelTop = siteConfig.banner.enable
                     <slot></slot>
                 </div>
             </main>
+
+            <!-- TOC in right column -->
+            {siteConfig.toc.enable && <aside id="toc-aside" class="hidden lg:block col-start-3 row-start-1 onload-animation"
+                style="width: 18rem; max-height: calc(100vh - 12rem); position: sticky; top: calc(4rem + var(--banner-height-home) + 2rem);"
+            >
+                <div id="toc-inner-wrapper" class="w-full max-h-[calc(100vh_-_10rem)] overflow-y-auto hide-scrollbar rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] shadow-lg">
+                    <div id="toc" class="w-full transition-swup-fade p-4">
+                        <TOC headings={headings}></TOC>
+                    </div>
+                </div>
+            </aside>}
+
+            <!-- #toc needs to exist for Swup to work normally -->
+            {!siteConfig.toc.enable && <div id="toc"></div>}
         </div>
 
         <BackToTop></BackToTop>
@@ -97,25 +115,4 @@ const mainPanelTop = siteConfig.banner.enable
 
 <!-- Footer - Fixed at bottom, full width -->
 <Footer></Footer>
-
-<!-- The things that should be under the banner, only the TOC for now -->
-<div class="absolute w-full z-0 hidden 2xl:block">
-    <div class="relative max-w-[var(--page-width)] mx-auto">
-        <!-- TOC component -->
-        {siteConfig.toc.enable && <div id="toc-wrapper" class:list={["hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center",
-            {"toc-hide": siteConfig.banner.enable}]}
-        >
-            <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
-                <div id="toc" class="w-full h-full transition-swup-fade ">
-                    <div class="h-8 w-full"></div>
-                    <TOC headings={headings}></TOC>
-                    <div class="h-8 w-full"></div>
-                </div>
-            </div>
-        </div>}
-
-        <!-- #toc needs to exist for Swup to work normally -->
-        {!siteConfig.toc.enable && <div id="toc"></div>}
-    </div>
-</div>
 </Layout>

@@ -3,21 +3,28 @@ import { Icon } from "astro-icon/components";
 import { navBarConfig, siteConfig } from "../config";
 import { LinkPresets } from "../constants/link-presets";
 import { LinkPreset, type NavBarLink } from "../types/config";
-import { url } from "../utils/url-utils";
-import Search from "./Search.svelte";
+import { pathsEqual, url } from "../utils/url-utils";
 import LightDarkSwitch from "./LightDarkSwitch.svelte";
+import Search from "./Search.svelte";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 
 const className = Astro.props.class;
 
 let links: NavBarLink[] = navBarConfig.links.map(
-    (item: NavBarLink | LinkPreset): NavBarLink => {
-        if (typeof item === "number") {
-            return LinkPresets[item];
-        }
-        return item;
-    },
+	(item: NavBarLink | LinkPreset): NavBarLink => {
+		if (typeof item === "number") {
+			return LinkPresets[item];
+		}
+		return item;
+	},
 );
+
+const iconMap: Record<string, string> = {
+	"主页": "material-symbols:home-rounded",
+	"AI资讯": "material-symbols:newsmode-rounded",
+	"归档": "material-symbols:inventory-2-rounded",
+	"关于": "material-symbols:info-rounded",
+};
 ---
 
 <div id="navbar" class="z-50 onload-animation fixed top-0 left-0 right-0 navbar">
@@ -33,10 +40,13 @@ let links: NavBarLink[] = navBarConfig.links.map(
         <!-- Desktop Nav Links (minimal) -->
         <nav class="hidden md:flex items-center gap-1">
             {links.slice(0, 5).map((l) => {
+                const iconName = iconMap[l.name] || "material-symbols:circle";
+                const isActive = pathsEqual(Astro.url.pathname, url(l.url));
                 return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
-                          class="navbar-link"
+                          class:list={["navbar-link", { "navbar-link-active": isActive }]}
                 >
-                    {l.name}
+                    <Icon name={iconName} class="navbar-link-icon"></Icon>
+                    <span>{l.name}</span>
                 </a>;
             })}
         </nav>
@@ -123,68 +133,104 @@ if (document.readyState === 'loading') {
 </script>}
 
 <style>
-    /* Glass morphism navbar */
+    /* Refined editorial navbar */
     .navbar {
-        background: rgba(30, 30, 30, 0.9);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border-color);
+        background: rgba(9, 9, 11, 0.85);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid var(--border-subtle);
     }
 
     .navbar-bg {
-        background: rgba(10, 10, 10, 0.85);
-        backdrop-filter: blur(12px);
+        background: rgba(9, 9, 11, 0.6);
+        backdrop-filter: blur(8px);
     }
 
     :root:not(.dark) .navbar {
-        background: rgba(250, 250, 250, 0.9);
-        box-shadow: none;
-        border-bottom: 1px solid #e5e5e5;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-sm);
     }
 
     .navbar-logo {
         font-family: 'Ma Shan Zheng', cursive;
-        font-size: 1.5rem;
+        font-size: 1.625rem;
         color: var(--text-color);
         text-decoration: none;
-        transition: all 0.3s ease;
-        letter-spacing: 0.08em;
-        background: linear-gradient(
-            135deg,
-            var(--text-color) 0%,
-            var(--primary) 100%
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        transition: all 0.25s ease;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        position: relative;
     }
 
-    .navbar-logo:hover {
-        background: linear-gradient(
-            135deg,
-            var(--primary) 0%,
-            var(--text-color) 100%
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .navbar-logo::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--text-color);
+        transition: width 0.25s ease;
+    }
+
+    .navbar-logo:hover::after {
+        width: 100%;
     }
 
     .navbar-link {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.875rem;
         font-weight: 500;
         color: var(--text-muted);
         text-decoration: none;
-        border-radius: 0.375rem;
-        transition: all 0.3s ease;
+        border-radius: 0.5rem;
+        transition: all 0.2s ease;
         border: 1px solid transparent;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: 0.01em;
     }
 
     .navbar-link:hover {
-        color: var(--primary);
-        background: rgba(86, 156, 214, 0.15);
-        border-color: var(--primary);
+        color: var(--text-color);
+        background: var(--btn-nav-bg);
+    }
+
+    .navbar-link-icon {
+        font-size: 1.125rem;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+    }
+
+    .navbar-link:hover .navbar-link-icon {
+        opacity: 1;
+    }
+
+    /* Active state for current page */
+    .navbar-link-active {
+        color: var(--text-color);
+        background: var(--btn-nav-bg);
+        position: relative;
+    }
+
+    .navbar-link-active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 1px;
+    }
+
+    .navbar-link-active .navbar-link-icon {
+        opacity: 1;
     }
 
     .navbar-menu-btn {
@@ -195,13 +241,12 @@ if (document.readyState === 'loading') {
         height: 2.5rem;
         border-radius: 0.5rem;
         color: var(--text-muted);
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         border: 1px solid transparent;
     }
 
     .navbar-menu-btn:hover {
-        color: var(--primary);
-        background: rgba(86, 156, 214, 0.15);
-        border-color: var(--primary);
+        color: var(--text-color);
+        background: var(--btn-nav-bg);
     }
 </style>
